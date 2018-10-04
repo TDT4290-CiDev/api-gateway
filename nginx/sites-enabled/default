@@ -5,8 +5,20 @@ server {
 	server_name _;
 	
 	root /var/www/html;
-	
+
+
+    location /api/blocks/ {
+		proxy_pass http://workflow-block-service:8080/;
+		proxy_set_header Host $host:$server_port;
+	}
+
+	location /api/forms/ {
+		proxy_pass http://forms-editor-service:8080/;
+		proxy_set_header Host $host:$server_port;
+	}
+
 	location / {
-		try_files $uri $uri/ =404;
+		proxy_pass http://frontend/;
+		proxy_set_header Host $host:$server_port;
 	}
 }
