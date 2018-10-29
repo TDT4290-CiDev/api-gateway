@@ -17,8 +17,14 @@ server {
 		proxy_set_header Host $host:$server_port;
 	}
 
+	location /api/flows/ {
+	    proxy_pass http://workflow-editor-service:8080/;
+	    proxy_set_header Host $host:$server_port;
+	}
+
 	location / {
 		proxy_pass http://frontend/;
 		proxy_set_header Host $host:$server_port;
 	}
+
 }
