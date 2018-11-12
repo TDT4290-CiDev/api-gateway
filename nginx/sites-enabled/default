@@ -27,6 +27,11 @@ server {
 	    proxy_set_header Host $host:$server_port;
 	}
 
+    location /api/form-responses/ {
+        proxy_pass http://forms-response-service:8080/;
+        proxy_set_header Host $host:$server_port;
+    }
+
 	location / {
 		proxy_pass http://frontend/;
 		proxy_set_header Host $host:$server_port;
